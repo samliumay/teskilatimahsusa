@@ -1,0 +1,42 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: $space-xs;
+}
+
+.label {
+  font-size: $text-sm;
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+.input {
+  @include input-base;
+
+  &.mono {
+    @include mono;
+  }
+
+  &.hasError {
+    border-color: var(--danger);
+  }
+
+  &.hasError:focus {
+    border-color: var(--danger);
+    box-shadow: 0 0 0 1px var(--danger-muted);
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    background: var(--bg-secondary);
+  }
+}
+
+.error {
+  font-size: $text-xs;
+  color: var(--danger);
+}

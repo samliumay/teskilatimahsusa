@@ -1,0 +1,172 @@
+@use '../styles/variables' as *;
+@use '../styles/mixins' as *;
+
+.dashboard {
+  max-width: 1200px;
+}
+
+.title {
+  font-size: $text-2xl;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: $space-xs;
+}
+
+.subtitle {
+  font-size: $text-base;
+  color: var(--text-secondary);
+  margin-bottom: $space-xl;
+}
+
+.statsGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: $space-md;
+  margin-bottom: $space-xl;
+}
+
+.statCard {
+  @include card;
+  display: flex;
+  flex-direction: column;
+  padding: $space-lg;
+  text-decoration: none;
+  transition: all $transition-fast;
+
+  &:hover {
+    border-color: var(--accent);
+    text-decoration: none;
+  }
+}
+
+.statCount {
+  font-family: $font-mono;
+  font-size: $text-3xl;
+  font-weight: 700;
+  color: var(--text-primary);
+  line-height: 1;
+  margin-bottom: $space-xs;
+}
+
+.statLabel {
+  font-size: $text-sm;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.recentGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: $space-lg;
+  margin-bottom: $space-xl;
+}
+
+.section {
+  margin-bottom: $space-xl;
+}
+
+.sectionTitle {
+  font-size: $text-lg;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: $space-md;
+}
+
+.emptyHint {
+  font-size: $text-sm;
+  color: var(--text-secondary);
+  font-style: italic;
+}
+
+.recentList {
+  display: flex;
+  flex-direction: column;
+  gap: $space-xs;
+}
+
+.recentItem {
+  @include card;
+  display: flex;
+  align-items: center;
+  gap: $space-sm;
+  padding: $space-sm $space-md;
+  text-decoration: none;
+  transition: border-color $transition-fast;
+
+  &:hover {
+    border-color: var(--accent);
+    text-decoration: none;
+  }
+}
+
+.recentName {
+  font-size: $text-sm;
+  font-weight: 500;
+  color: var(--text-primary);
+  @include truncate;
+  flex: 1;
+}
+
+.recentMeta {
+  font-size: $text-xs;
+  color: var(--text-secondary);
+  font-family: $font-mono;
+  white-space: nowrap;
+}
+
+.recentDate {
+  font-size: $text-xs;
+  color: var(--text-secondary);
+  font-family: $font-mono;
+  white-space: nowrap;
+}
+
+.riskBadge {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  padding: 1px 6px;
+  border-radius: $radius-sm;
+  white-space: nowrap;
+}
+
+.riskLOW {
+  background: var(--success);
+  color: #fff;
+}
+
+.riskMEDIUM {
+  background: var(--warning);
+  color: #000;
+}
+
+.riskHIGH {
+  background: var(--danger);
+  color: #fff;
+}
+
+.riskCRITICAL {
+  background: #8b0000;
+  color: #fff;
+}
+
+.actions {
+  display: flex;
+  gap: $space-sm;
+  flex-wrap: wrap;
+}
+
+.actionBtn {
+  @include button-base;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  color: var(--text-primary);
+  text-decoration: none;
+
+  &:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+    text-decoration: none;
+  }
+}

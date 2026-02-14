@@ -1,0 +1,23 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+.card {
+  @include card;
+  padding: $space-md;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: $space-sm;
+  margin-bottom: $space-md;
+  border-bottom: 1px solid var(--border);
+}
+
+.title {
+  font-size: $text-base;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0;
+}

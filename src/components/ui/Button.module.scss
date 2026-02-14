@@ -1,0 +1,71 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+.button {
+  @include button-base;
+  justify-content: center;
+  line-height: 1;
+  white-space: nowrap;
+  user-select: none;
+
+  &:focus-visible {
+    outline: 2px solid var(--border-focus);
+    outline-offset: 2px;
+  }
+}
+
+// Variants
+
+.primary {
+  background: var(--accent);
+  color: #fff;
+
+  &:hover:not(:disabled) {
+    background: var(--accent-hover);
+  }
+
+  &:active:not(:disabled) {
+    filter: brightness(0.9);
+  }
+}
+
+.secondary {
+  background: transparent;
+  color: var(--text-primary);
+  border: 1px solid var(--border);
+
+  &:hover:not(:disabled) {
+    background: var(--bg-hover);
+    border-color: var(--text-secondary);
+  }
+
+  &:active:not(:disabled) {
+    background: var(--bg-secondary);
+  }
+}
+
+.danger {
+  background: var(--danger);
+  color: #fff;
+
+  &:hover:not(:disabled) {
+    filter: brightness(1.1);
+  }
+
+  &:active:not(:disabled) {
+    filter: brightness(0.9);
+  }
+}
+
+// Sizes
+
+.sm {
+  padding: $space-xs $space-sm;
+  font-size: $text-sm;
+  gap: $space-xs;
+}
+
+.md {
+  padding: $space-sm $space-md;
+  font-size: $text-base;
+}

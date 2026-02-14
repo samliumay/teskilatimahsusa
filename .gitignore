@@ -1,0 +1,40 @@
+# Dependencies
+node_modules/
+npm-debug.log*
+
+# Next.js
+.next/
+out/
+next-env.d.ts
+
+# Environment
+.env
+.env*.local
+
+# Drizzle
+src/drizzle/migrations/
+
+# Testing
+coverage/
+playwright-report/
+test-results/
+
+# IDE
+.vscode/*
+!.vscode/settings.json
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Build
+*.tsbuildinfo
+
+# Vercel
+.vercel
+
+# Claude
+.claude/plans/

@@ -1,0 +1,174 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+.page {
+  max-width: 1400px;
+}
+
+.pageHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: $space-lg;
+}
+
+.title {
+  font-size: $text-2xl;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: $space-xs;
+}
+
+.description {
+  font-size: $text-base;
+  color: var(--text-secondary);
+}
+
+.categories {
+  display: flex;
+  flex-direction: column;
+  gap: $space-lg;
+}
+
+.category {
+  // gap handles spacing
+}
+
+.categoryHeader {
+  display: flex;
+  align-items: center;
+  gap: $space-sm;
+  margin-bottom: $space-sm;
+  padding-bottom: $space-xs;
+  border-bottom: 1px solid var(--border);
+}
+
+.categoryTitle {
+  font-size: $text-lg;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.categoryCount {
+  @include mono;
+  font-size: $text-sm;
+  color: var(--text-secondary);
+  background: var(--bg-secondary);
+  padding: $space-xs $space-sm;
+  border-radius: $radius-sm;
+}
+
+.cardList {
+  display: flex;
+  flex-direction: column;
+  gap: $space-xs;
+}
+
+.emptyState {
+  @include card;
+  padding: $space-lg;
+  text-align: center;
+  color: var(--text-disabled);
+  font-size: $text-sm;
+}
+
+.relCard {
+  @include card;
+  padding: $space-sm $space-md;
+  display: flex;
+  flex-direction: column;
+  gap: $space-xs;
+}
+
+.relEntities {
+  display: flex;
+  align-items: center;
+  gap: $space-sm;
+  flex-wrap: wrap;
+}
+
+.entityLink {
+  color: var(--accent);
+  text-decoration: none;
+  font-weight: 500;
+  font-size: $text-sm;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.relArrow {
+  color: var(--text-secondary);
+  font-size: $text-sm;
+}
+
+.relMeta {
+  display: flex;
+  align-items: center;
+  gap: $space-sm;
+  flex-wrap: wrap;
+}
+
+.relType {
+  font-family: $font-mono;
+  font-size: $text-xs;
+  color: var(--text-primary);
+  background: var(--bg-secondary);
+  padding: 1px 6px;
+  border-radius: $radius-sm;
+}
+
+.relStrength {
+  font-family: $font-mono;
+  font-size: $text-xs;
+  color: var(--text-secondary);
+  background: var(--bg-secondary);
+  padding: 1px 6px;
+  border-radius: $radius-sm;
+}
+
+.relDept {
+  font-family: $font-mono;
+  font-size: $text-xs;
+  color: var(--text-secondary);
+}
+
+.relContext {
+  font-size: $text-xs;
+  color: var(--text-secondary);
+  line-height: 1.4;
+  margin: 0;
+}
+
+.activeTag {
+  font-size: 10px;
+  font-weight: 600;
+  padding: 1px 6px;
+  border-radius: $radius-sm;
+  background: var(--success);
+  color: #fff;
+}
+
+.inactiveTag {
+  font-size: 10px;
+  font-weight: 600;
+  padding: 1px 6px;
+  border-radius: $radius-sm;
+  background: var(--text-secondary);
+  color: #fff;
+}
+
+.statusBadge {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  padding: 1px 6px;
+  border-radius: $radius-sm;
+  white-space: nowrap;
+}
+
+.statusCONFIRMED { background: var(--success); color: #fff; }
+.statusSUSPECTED { background: var(--warning); color: #000; }
+.statusUNVERIFIED { background: var(--accent); color: #fff; }
+.statusDENIED { background: var(--text-secondary); color: #fff; }

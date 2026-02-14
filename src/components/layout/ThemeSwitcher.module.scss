@@ -1,0 +1,38 @@
+@use '../../styles/variables' as *;
+
+.switcher {
+  display: flex;
+  gap: 2px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: $radius-md;
+  padding: 2px;
+}
+
+.btn {
+  padding: $space-xs $space-sm;
+  background: transparent;
+  border: none;
+  border-radius: $radius-sm;
+  color: var(--text-secondary);
+  font-family: $font-sans;
+  font-size: $text-xs;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all $transition-fast;
+
+  &:hover {
+    color: var(--text-primary);
+    background: var(--bg-hover);
+  }
+}
+
+.active {
+  background: var(--accent-muted);
+  color: var(--accent);
+
+  &:hover {
+    background: var(--accent-muted);
+    color: var(--accent);
+  }
+}

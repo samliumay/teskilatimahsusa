@@ -1,0 +1,269 @@
+@use '../../../styles/variables' as *;
+@use '../../../styles/mixins' as *;
+
+.page {
+  max-width: 1200px;
+}
+
+.pageHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: $space-lg;
+}
+
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: $space-xs;
+  font-size: $text-sm;
+  color: var(--text-secondary);
+  margin-bottom: $space-sm;
+}
+
+.breadcrumbLink {
+  color: var(--accent);
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.breadcrumbSep {
+  color: var(--text-disabled);
+}
+
+.title {
+  font-size: $text-2xl;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: $space-xs;
+}
+
+.entityId {
+  @include mono;
+  color: var(--text-secondary);
+  user-select: all;
+}
+
+.headerActions {
+  display: flex;
+  gap: $space-sm;
+}
+
+.editBtn {
+  @include button-base;
+  background: var(--accent);
+  color: #fff;
+
+  &:hover {
+    opacity: 0.9;
+  }
+}
+
+.deleteBtn {
+  @include button-base;
+  background: transparent;
+  border: 1px solid var(--danger);
+  color: var(--danger);
+
+  &:hover {
+    background: var(--danger);
+    color: #fff;
+  }
+}
+
+.grid {
+  display: flex;
+  flex-direction: column;
+  gap: $space-lg;
+}
+
+.section {
+  // no extra spacing needed; gap handles it
+}
+
+.sectionTitle {
+  font-size: $text-lg;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: $space-sm;
+  padding-bottom: $space-xs;
+  border-bottom: 1px solid var(--border);
+}
+
+.card {
+  @include card;
+  padding: $space-md;
+}
+
+.fieldGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: $space-md $space-xl;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: $space-xs;
+}
+
+.fieldLabel {
+  font-size: $text-xs;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.fieldValue {
+  font-size: $text-base;
+  color: var(--text-primary);
+}
+
+.fieldValueMono {
+  @include mono;
+  color: var(--text-primary);
+}
+
+.subsection {
+  padding: $space-sm 0;
+
+  & + & {
+    border-top: 1px solid var(--border);
+  }
+}
+
+.subsectionTitle {
+  font-size: $text-sm;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-bottom: $space-sm;
+}
+
+.emptyState {
+  padding: $space-md;
+  text-align: center;
+  color: var(--text-disabled);
+  font-size: $text-sm;
+}
+
+.relItem {
+  display: flex;
+  align-items: center;
+  gap: $space-sm;
+  padding: $space-sm 0;
+  border-bottom: 1px solid var(--border);
+  flex-wrap: wrap;
+
+  &:last-child { border-bottom: none; }
+}
+
+.entityLink {
+  color: var(--accent);
+  text-decoration: none;
+  font-weight: 500;
+  font-size: $text-sm;
+
+  &:hover { text-decoration: underline; }
+}
+
+.relMeta {
+  display: flex;
+  align-items: center;
+  gap: $space-sm;
+  margin-left: auto;
+  flex-wrap: wrap;
+}
+
+.relType {
+  font-family: $font-mono;
+  font-size: $text-xs;
+  background: var(--bg-secondary);
+  padding: 1px 6px;
+  border-radius: $radius-sm;
+  color: var(--text-primary);
+}
+
+.relArrow {
+  color: var(--text-secondary);
+}
+
+.riskBadge {
+  font-size: 11px;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: $radius-sm;
+  margin-left: $space-sm;
+  vertical-align: middle;
+}
+
+.riskLOW { background: var(--success); color: #fff; }
+.riskMEDIUM { background: var(--warning); color: #000; }
+.riskHIGH { background: var(--danger); color: #fff; }
+.riskCRITICAL { background: #8b0000; color: #fff; }
+
+.statusBadge {
+  font-size: 10px;
+  font-weight: 600;
+  padding: 1px 6px;
+  border-radius: $radius-sm;
+}
+
+.statusCONFIRMED { background: var(--success); color: #fff; }
+.statusSUSPECTED { background: var(--warning); color: #000; }
+.statusUNVERIFIED { background: var(--accent); color: #fff; }
+.statusDENIED { background: var(--text-secondary); color: #fff; }
+
+.activeTag {
+  font-size: 10px;
+  font-weight: 600;
+  padding: 1px 6px;
+  border-radius: $radius-sm;
+  background: var(--success);
+  color: #fff;
+}
+
+.inactiveTag {
+  font-size: 10px;
+  font-weight: 600;
+  padding: 1px 6px;
+  border-radius: $radius-sm;
+  background: var(--text-secondary);
+  color: #fff;
+}
+
+.notesText {
+  font-size: $text-sm;
+  line-height: 1.6;
+  color: var(--text-primary);
+  white-space: pre-wrap;
+  margin: 0;
+}
+
+.tagList {
+  display: flex;
+  gap: $space-xs;
+  flex-wrap: wrap;
+}
+
+.tag {
+  font-size: $text-xs;
+  background: var(--bg-secondary);
+  color: var(--text-secondary);
+  padding: 2px 8px;
+  border-radius: $radius-sm;
+}
+
+.coordLink {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  color: var(--accent);
+  text-decoration: none;
+
+  &:hover { text-decoration: underline; }
+}

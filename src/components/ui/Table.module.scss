@@ -1,0 +1,58 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+.wrapper {
+  width: 100%;
+  overflow-x: auto;
+  @include scrollbar;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: $text-sm;
+}
+
+.th {
+  padding: $space-xs $space-sm;
+  text-align: left;
+  font-weight: 600;
+  font-size: $text-xs;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--text-secondary);
+  border-bottom: 1px solid var(--border);
+  white-space: nowrap;
+  user-select: none;
+}
+
+.td {
+  padding: $space-xs $space-sm;
+  color: var(--text-primary);
+  border-bottom: 1px solid var(--border);
+  @include truncate;
+  max-width: 300px;
+}
+
+.mono {
+  @include mono;
+}
+
+.row {
+  transition: background $transition-fast;
+
+  &:hover {
+    background: var(--bg-hover);
+  }
+}
+
+.clickable {
+  cursor: pointer;
+}
+
+.empty {
+  padding: $space-lg;
+  text-align: center;
+  color: var(--text-disabled);
+  font-size: $text-sm;
+}

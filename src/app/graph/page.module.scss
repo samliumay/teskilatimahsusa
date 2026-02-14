@@ -1,0 +1,92 @@
+@use '../../styles/variables' as *;
+
+.page {
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - #{$header-height} - #{$space-lg} * 2);
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: $space-md;
+}
+
+.title {
+  font-size: $text-2xl;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.legend {
+  display: flex;
+  gap: $space-md;
+}
+
+.legendItem {
+  display: flex;
+  align-items: center;
+  gap: $space-xs;
+  font-size: $text-sm;
+  color: var(--text-secondary);
+}
+
+.dot {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.dotPerson {
+  background: #4a90d9;
+}
+
+.dotOrg {
+  background: #d9a84a;
+}
+
+.dotEvent {
+  background: #9b59b6;
+  border-radius: 2px;
+  transform: rotate(45deg);
+  width: 8px;
+  height: 8px;
+}
+
+.legendHint {
+  font-size: $text-xs;
+  color: var(--text-disabled);
+  font-style: italic;
+  margin-left: $space-md;
+}
+
+.graphWrapper {
+  flex: 1;
+  min-height: 0;
+}
+
+.state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 400px;
+  gap: $space-sm;
+}
+
+.stateText {
+  font-size: $text-lg;
+  color: var(--text-secondary);
+}
+
+.stateError {
+  font-size: $text-lg;
+  color: var(--danger);
+}
+
+.stateHint {
+  font-size: $text-base;
+  color: var(--text-disabled);
+}

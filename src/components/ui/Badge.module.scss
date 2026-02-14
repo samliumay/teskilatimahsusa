@@ -1,0 +1,47 @@
+@use '../../styles/variables' as *;
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 1px $space-sm;
+  font-size: $text-xs;
+  font-weight: 600;
+  line-height: 1.5;
+  border-radius: $radius-sm;
+  white-space: nowrap;
+  user-select: none;
+  text-transform: uppercase;
+  letter-spacing: 0.025em;
+}
+
+// Variant colors
+
+.low {
+  background: var(--success-muted);
+  color: var(--success);
+}
+
+.medium {
+  background: var(--warning-muted);
+  color: var(--warning);
+}
+
+.high {
+  background: var(--danger-muted);
+  color: var(--danger);
+}
+
+.critical {
+  background: var(--danger);
+  color: #fff;
+}
+
+.info {
+  background: var(--accent-muted);
+  color: var(--accent);
+}
+
+.default {
+  background: var(--bg-hover);
+  color: var(--text-secondary);
+}

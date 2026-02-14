@@ -1,0 +1,184 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+.page {
+  max-width: 1400px;
+}
+
+.pageHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: $space-lg;
+}
+
+.title {
+  font-size: $text-2xl;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: $space-xs;
+}
+
+.description {
+  font-size: $text-base;
+  color: var(--text-secondary);
+}
+
+.addBtn {
+  @include button-base;
+  background: var(--accent);
+  color: #fff;
+
+  &:hover {
+    opacity: 0.9;
+  }
+}
+
+.toolbar {
+  display: flex;
+  align-items: center;
+  gap: $space-md;
+  margin-bottom: $space-md;
+}
+
+.search {
+  @include input-base;
+  max-width: 320px;
+}
+
+.filters {
+  display: flex;
+  gap: $space-sm;
+}
+
+.filterSelect {
+  @include input-base;
+  width: auto;
+  min-width: 150px;
+  cursor: pointer;
+}
+
+.tableWrapper {
+  @include card;
+  overflow-x: auto;
+  @include scrollbar;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: $text-base;
+
+  th,
+  td {
+    padding: $space-sm $space-md;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+    white-space: nowrap;
+  }
+
+  th {
+    font-size: $text-sm;
+    font-weight: 600;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    background: var(--bg-secondary);
+  }
+
+  td {
+    color: var(--text-primary);
+    font-family: $font-mono;
+    font-size: $text-sm;
+  }
+
+  tbody tr:hover {
+    background: var(--bg-secondary);
+    cursor: pointer;
+  }
+}
+
+.emptyRow:hover {
+  background: transparent !important;
+  cursor: default !important;
+}
+
+.emptyState {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: $space-sm;
+  padding: $space-2xl;
+  color: var(--text-secondary);
+  font-family: $font-sans;
+  font-size: $text-base;
+}
+
+.emptyIcon {
+  color: var(--text-disabled);
+  font-size: $text-xs;
+}
+
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: $space-md;
+  font-size: $text-sm;
+  color: var(--text-secondary);
+}
+
+.paginationInfo {
+  font-family: $font-mono;
+}
+
+.paginationControls {
+  display: flex;
+  align-items: center;
+  gap: $space-sm;
+}
+
+.pageBtn {
+  @include button-base;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  color: var(--text-primary);
+  font-size: $text-sm;
+  padding: $space-xs $space-sm;
+
+  &:hover:not(:disabled) {
+    border-color: var(--accent);
+  }
+}
+
+.pageIndicator {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  color: var(--text-secondary);
+  padding: 0 $space-sm;
+}
+
+.entityLink {
+  color: var(--accent);
+  text-decoration: none;
+  font-family: $font-sans;
+  font-weight: 500;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.riskBadge {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  padding: 1px 6px;
+  border-radius: $radius-sm;
+  white-space: nowrap;
+}
+
+.riskLOW { background: var(--success); color: #fff; }
+.riskMEDIUM { background: var(--warning); color: #000; }
+.riskHIGH { background: var(--danger); color: #fff; }
+.riskCRITICAL { background: #8b0000; color: #fff; }

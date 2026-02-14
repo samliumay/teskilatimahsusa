@@ -1,0 +1,125 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+.sidebar {
+  width: $sidebar-width;
+  min-height: 100vh;
+  background: var(--bg-secondary);
+  border-right: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: $space-sm;
+  padding: $space-md;
+  border-bottom: 1px solid var(--border);
+}
+
+.logoMark {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  background: var(--accent);
+  color: #fff;
+  font-family: $font-mono;
+  font-size: $text-sm;
+  font-weight: 700;
+  border-radius: $radius-md;
+  flex-shrink: 0;
+}
+
+.logoText {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.title {
+  font-size: $text-base;
+  font-weight: 600;
+  color: var(--text-primary);
+  line-height: 1.2;
+}
+
+.subtitle {
+  font-size: $text-xs;
+  color: var(--text-secondary);
+  line-height: 1.2;
+}
+
+.nav {
+  flex: 1;
+  padding: $space-sm;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.navItem {
+  display: flex;
+  align-items: center;
+  gap: $space-sm;
+  padding: $space-sm $space-md;
+  border-radius: $radius-sm;
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-size: $text-base;
+  transition: all $transition-fast;
+
+  &:hover {
+    background: var(--bg-hover);
+    color: var(--text-primary);
+    text-decoration: none;
+  }
+}
+
+.active {
+  background: var(--accent-muted);
+  color: var(--accent);
+
+  &:hover {
+    background: var(--accent-muted);
+    color: var(--accent);
+  }
+
+  .shortcut {
+    background: var(--accent);
+    color: #fff;
+  }
+}
+
+.shortcut {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  background: var(--bg-hover);
+  border-radius: $radius-sm;
+  font-family: $font-mono;
+  font-size: $text-xs;
+  font-weight: 600;
+  flex-shrink: 0;
+  transition: all $transition-fast;
+}
+
+.label {
+  @include truncate;
+}
+
+.footer {
+  padding: $space-md;
+  border-top: 1px solid var(--border);
+}
+
+.version {
+  font-family: $font-mono;
+  font-size: $text-xs;
+  color: var(--text-disabled);
+}

@@ -6,8 +6,6 @@ Social network analysis and intelligence system. Tracks people, organizations, e
 
 https://github.com/user-attachments/assets/a1be73ef-aeee-437a-a1b4-e1c082f99a2f
 
-> [Watch on YouTube](https://youtu.be/rLGDhpelDUU) if the video doesn't load above.
-
 ## Prerequisites
 
 - [Node.js](https://nodejs.org/) 20+
@@ -71,3 +69,7 @@ The app will be available at http://localhost:3000.
 ## License
 
 MIT
+
+## Note
+
+This is a **proof of concept (POC)**. The project needs significant updates and improvements before it is production-ready. The primary goal at this stage is to gauge interest and attention — if there is demand, development will continue and expand.

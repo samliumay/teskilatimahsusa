@@ -18,6 +18,18 @@
   }
 }
 
+.uploadBtn {
+  @include button-base;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  color: var(--text-primary);
+
+  &:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+}
+
 .editBtn {
   @include button-base;
   background: var(--accent);

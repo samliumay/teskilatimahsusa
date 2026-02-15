@@ -1,0 +1,119 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: $space-sm;
+}
+
+.dropZone {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: $space-sm;
+  min-height: 64px;
+  padding: $space-md;
+  border: 2px dashed var(--border);
+  border-radius: $radius-md;
+  background: var(--bg-secondary);
+  cursor: pointer;
+  transition: all $transition-fast;
+
+  &:hover {
+    border-color: var(--accent);
+    background: var(--bg-hover);
+  }
+}
+
+.dropZoneActive {
+  border-color: var(--accent);
+  background: var(--bg-hover);
+}
+
+.fileInput {
+  display: none;
+}
+
+.dropIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border: 1px solid var(--border);
+  border-radius: $radius-sm;
+  font-size: $text-base;
+  color: var(--text-secondary);
+  flex-shrink: 0;
+}
+
+.dropText {
+  font-size: $text-sm;
+  color: var(--text-secondary);
+}
+
+.fileList {
+  display: flex;
+  flex-direction: column;
+  gap: $space-xs;
+}
+
+.fileItem {
+  display: flex;
+  align-items: center;
+  gap: $space-sm;
+  padding: $space-sm;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: $radius-sm;
+}
+
+.fileInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+  flex-shrink: 0;
+  max-width: 200px;
+}
+
+.fileName {
+  font-family: $font-mono;
+  font-size: $text-xs;
+  font-weight: 500;
+  color: var(--text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.fileMeta {
+  font-size: 10px;
+  color: var(--text-secondary);
+}
+
+.descInput {
+  @include input-base;
+  flex: 1;
+  font-size: $text-xs;
+  padding: $space-xs $space-sm;
+}
+
+.removeBtn {
+  background: none;
+  border: 1px solid var(--border);
+  border-radius: $radius-sm;
+  color: var(--text-secondary);
+  cursor: pointer;
+  padding: $space-xs;
+  font-size: $text-xs;
+  line-height: 1;
+  flex-shrink: 0;
+  transition: all $transition-fast;
+
+  &:hover {
+    border-color: var(--danger);
+    color: var(--danger);
+  }
+}

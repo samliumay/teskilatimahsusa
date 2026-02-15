@@ -1,0 +1,144 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: $space-md;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: $space-xs;
+}
+
+.label {
+  font-size: $text-xs;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.textarea {
+  @include input-base;
+  min-height: 60px;
+  resize: vertical;
+  font-family: $font-sans;
+}
+
+.error {
+  padding: $space-sm;
+  background: rgba(217, 74, 74, 0.1);
+  border: 1px solid var(--danger);
+  border-radius: $radius-sm;
+  color: var(--danger);
+  font-size: $text-sm;
+}
+
+.dropZone {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 120px;
+  padding: $space-lg;
+  border: 2px dashed var(--border);
+  border-radius: $radius-md;
+  background: var(--bg-secondary);
+  cursor: pointer;
+  transition: all $transition-fast;
+  text-align: center;
+
+  &:hover {
+    border-color: var(--accent);
+    background: var(--bg-hover);
+  }
+}
+
+.dropZoneActive {
+  border-color: var(--accent);
+  background: var(--bg-hover);
+}
+
+.dropZoneHasFile {
+  border-style: solid;
+  border-color: var(--accent);
+}
+
+.fileInput {
+  display: none;
+}
+
+.selectedFile {
+  display: flex;
+  flex-direction: column;
+  gap: $space-xs;
+  align-items: center;
+}
+
+.fileName {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  font-weight: 600;
+  color: var(--text-primary);
+  word-break: break-all;
+}
+
+.fileMeta {
+  font-size: $text-xs;
+  color: var(--text-secondary);
+}
+
+.dropPrompt {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: $space-sm;
+  color: var(--text-secondary);
+  font-size: $text-sm;
+}
+
+.dropIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border: 1px solid var(--border);
+  border-radius: $radius-sm;
+  font-size: $text-lg;
+  color: var(--text-secondary);
+}
+
+.actions {
+  display: flex;
+  gap: $space-sm;
+  padding-top: $space-sm;
+  border-top: 1px solid var(--border);
+}
+
+.submitBtn {
+  @include button-base;
+  background: var(--accent);
+  color: #fff;
+
+  &:hover:not(:disabled) {
+    opacity: 0.9;
+  }
+
+  &:disabled {
+    opacity: 0.5;
+  }
+}
+
+.cancelBtn {
+  @include button-base;
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--text-primary);
+
+  &:hover {
+    background: var(--bg-secondary);
+  }
+}

@@ -19,19 +19,12 @@
   border-bottom: 1px solid var(--border);
 }
 
-.logoMark {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 32px;
-  height: 32px;
-  background: var(--accent);
-  color: #fff;
-  font-family: $font-mono;
-  font-size: $text-sm;
-  font-weight: 700;
+.logoImage {
+  width: 36px;
+  height: 36px;
   border-radius: $radius-md;
   flex-shrink: 0;
+  object-fit: contain;
 }
 
 .logoText {

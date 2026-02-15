@@ -12,6 +12,7 @@ import {
 import { notDeleted } from '@/lib/db/helpers';
 import { eq, and } from 'drizzle-orm';
 import { DetailActions } from '@/components/ui/DetailActions';
+import { FileSection } from '@/components/files/FileSection';
 import styles from './page.module.scss';
 
 function personName(first: string | null, last: string | null) {
@@ -229,6 +230,8 @@ export default async function EventDetailPage({ params }: PageProps) {
             </div>
           </section>
         )}
+
+        <FileSection entityType="event" entityId={id} />
 
         {evt.notes && (
           <section className={styles.section}>

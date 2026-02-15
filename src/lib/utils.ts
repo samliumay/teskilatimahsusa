@@ -26,3 +26,14 @@ export function truncate(str: string, maxLen: number): string {
   if (str.length <= maxLen) return str;
   return str.slice(0, maxLen - 1) + '\u2026';
 }
+
+/**
+ * Format bytes into a human-readable file size string.
+ */
+export function formatFileSize(bytes: number | null | undefined): string {
+  if (bytes == null || bytes === 0) return '0 B';
+  const units = ['B', 'KB', 'MB', 'GB'];
+  const i = Math.min(Math.floor(Math.log(bytes) / Math.log(1024)), units.length - 1);
+  const size = bytes / Math.pow(1024, i);
+  return `${i === 0 ? size : size.toFixed(1)} ${units[i]}`;
+}

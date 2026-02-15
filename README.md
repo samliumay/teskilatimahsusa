@@ -35,6 +35,20 @@ Open http://localhost:3000
 
 MinIO console available at http://localhost:9001
 
+## Production Build
+
+```bash
+# Build the application
+npm run build
+
+# Start the production server
+npm start
+```
+
+The app will be available at http://localhost:3000.
+
+> **Note:** Docker services (PostgreSQL + MinIO) must be running before starting the production server.
+
 ## Scripts
 
 | Command | Description |

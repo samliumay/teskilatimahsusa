@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import styles from './Sidebar.module.scss';
 
@@ -24,7 +25,14 @@ export function Sidebar() {
   return (
     <aside className={styles.sidebar}>
       <div className={styles.logo}>
-        <span className={styles.logoMark}>TM</span>
+        <Image
+          src="/symboll.png"
+          alt="Teşkilât-ı Mahsusa"
+          width={36}
+          height={36}
+          className={styles.logoImage}
+          priority
+        />
         <div className={styles.logoText}>
           <span className={styles.title}>Teskilat</span>
           <span className={styles.subtitle}>Intelligence System</span>

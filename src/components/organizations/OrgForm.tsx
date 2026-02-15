@@ -3,6 +3,7 @@
 import { useState, type FormEvent, type KeyboardEvent } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
+import { FileAttachments, type PendingFile } from '../files/FileAttachments';
 import styles from '../ui/EntityForm.module.scss';
 
 interface OrgData {
@@ -33,6 +34,7 @@ export function OrgForm({ initialData, mode }: OrgFormProps) {
   const [error, setError] = useState('');
   const [tags, setTags] = useState<string[]>(initialData?.tags || []);
   const [tagInput, setTagInput] = useState('');
+  const [pendingFiles, setPendingFiles] = useState<PendingFile[]>([]);
 
   function handleTagKeyDown(e: KeyboardEvent<HTMLInputElement>) {
     if (e.key === 'Enter' || e.key === ',') {
@@ -113,7 +115,19 @@ export function OrgForm({ initialData, mode }: OrgFormProps) {
         return;
       }
 
-      router.push(`/organizations/${json.data.id}`);
+      const entityId = json.data.id;
+
+      for (const pf of pendingFiles) {
+        const fileData = new FormData();
+        fileData.append('file', pf.file);
+        fileData.append('organizationId', entityId);
+        if (pf.description.trim()) {
+          fileData.append('description', pf.description.trim());
+        }
+        await fetch('/api/files', { method: 'POST', body: fileData });
+      }
+
+      router.push(`/organizations/${entityId}`);
       router.refresh();
     } catch {
       setError('Network error');
@@ -228,6 +242,11 @@ export function OrgForm({ initialData, mode }: OrgFormProps) {
             <textarea name="notes" className={styles.textarea} rows={3} defaultValue={initialData?.notes || ''} />
           </div>
         </div>
+      </div>
+
+      <div className={styles.section}>
+        <h3 className={styles.sectionTitle}>Attachments</h3>
+        <FileAttachments files={pendingFiles} onChange={setPendingFiles} />
       </div>
 
       <div className={styles.actions}>

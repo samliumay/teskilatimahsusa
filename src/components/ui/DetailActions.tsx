@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { Modal } from './Modal';
 import { LinkEntityModal } from '../relationships/LinkEntityModal';
+import { FileUploadModal } from '../files/FileUploadModal';
 import styles from './DetailActions.module.scss';
 
 interface DetailActionsProps {
@@ -23,6 +24,7 @@ export function DetailActions({ entityType, entityId, entityName }: DetailAction
   const router = useRouter();
   const [showConfirm, setShowConfirm] = useState(false);
   const [showLink, setShowLink] = useState(false);
+  const [showUpload, setShowUpload] = useState(false);
   const [archiving, setArchiving] = useState(false);
 
   async function handleArchive() {
@@ -42,6 +44,7 @@ export function DetailActions({ entityType, entityId, entityName }: DetailAction
     <>
       <div className={styles.actions}>
         <button className={styles.linkBtn} onClick={() => setShowLink(true)}>+ Link</button>
+        <button className={styles.uploadBtn} onClick={() => setShowUpload(true)}>+ File</button>
         <Link href={`/${entityType}/${entityId}/edit`} className={styles.editBtn}>Edit</Link>
         <button className={styles.deleteBtn} onClick={() => setShowConfirm(true)}>Archive</button>
       </div>
@@ -52,6 +55,13 @@ export function DetailActions({ entityType, entityId, entityName }: DetailAction
         sourceType={sourceTypeMap[entityType]}
         sourceId={entityId}
         sourceName={entityName}
+      />
+
+      <FileUploadModal
+        isOpen={showUpload}
+        onClose={() => setShowUpload(false)}
+        entityType={sourceTypeMap[entityType]}
+        entityId={entityId}
       />
 
       <Modal isOpen={showConfirm} onClose={() => setShowConfirm(false)} title="Confirm Archive">

@@ -2,6 +2,9 @@
 
 Social network analysis and intelligence system. Tracks people, organizations, events, and their relationships with network graph visualization.
 
+## Basic Explanation Video
+[![Basic Explanation](https://img.youtube.com/vi/rLGDhpelDUU/0.jpg)](https://youtu.be/rLGDhpelDUU)
+
 ## Prerequisites
 
 - [Node.js](https://nodejs.org/) 20+

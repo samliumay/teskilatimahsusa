@@ -1,0 +1,153 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: $space-lg;
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: $space-sm;
+}
+
+.sectionTitle {
+  font-size: $text-sm;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding-bottom: $space-xs;
+  border-bottom: 1px solid var(--border);
+}
+
+.fieldGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: $space-md;
+}
+
+.fieldFull {
+  grid-column: 1 / -1;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: $space-xs;
+}
+
+.label {
+  font-size: $text-xs;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.input {
+  @include input-base;
+}
+
+.select {
+  @include input-base;
+  cursor: pointer;
+}
+
+.textarea {
+  @include input-base;
+  min-height: 80px;
+  resize: vertical;
+  font-family: $font-sans;
+}
+
+.actions {
+  display: flex;
+  gap: $space-sm;
+  padding-top: $space-md;
+  border-top: 1px solid var(--border);
+}
+
+.submitBtn {
+  @include button-base;
+  background: var(--accent);
+  color: #fff;
+
+  &:hover:not(:disabled) {
+    opacity: 0.9;
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+.cancelBtn {
+  @include button-base;
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--text-primary);
+
+  &:hover {
+    background: var(--bg-secondary);
+  }
+}
+
+.error {
+  @include card;
+  padding: $space-md;
+  background: rgba(217, 74, 74, 0.1);
+  border-color: var(--danger);
+  color: var(--danger);
+  font-size: $text-sm;
+}
+
+.tagsInput {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $space-xs;
+  align-items: center;
+  padding: $space-xs;
+  @include input-base;
+  cursor: text;
+}
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  font-size: $text-xs;
+  background: var(--bg-secondary);
+  color: var(--text-secondary);
+  padding: 2px 6px;
+  border-radius: $radius-sm;
+}
+
+.tagRemove {
+  background: none;
+  border: none;
+  color: var(--text-secondary);
+  cursor: pointer;
+  padding: 0 2px;
+  font-size: 10px;
+  line-height: 1;
+
+  &:hover {
+    color: var(--danger);
+  }
+}
+
+.tagInput {
+  border: none;
+  outline: none;
+  background: transparent;
+  color: var(--text-primary);
+  font-family: $font-sans;
+  font-size: $text-sm;
+  min-width: 80px;
+  flex: 1;
+  padding: 2px 0;
+}

@@ -11,6 +11,7 @@ import {
 } from '@/lib/db/schema';
 import { notDeleted } from '@/lib/db/helpers';
 import { eq, and } from 'drizzle-orm';
+import { DetailActions } from '@/components/ui/DetailActions';
 import styles from './page.module.scss';
 
 function personName(first: string | null, last: string | null) {
@@ -103,10 +104,7 @@ export default async function OrganizationDetailPage({ params }: PageProps) {
           </h1>
           <span className={styles.entityId}>{id}</span>
         </div>
-        <div className={styles.headerActions}>
-          <button className={styles.editBtn}>Edit</button>
-          <button className={styles.deleteBtn}>Archive</button>
-        </div>
+        <DetailActions entityType="organizations" entityId={id} entityName={org.name} />
       </div>
 
       <div className={styles.grid}>

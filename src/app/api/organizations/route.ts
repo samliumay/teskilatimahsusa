@@ -11,7 +11,7 @@ const createOrgSchema = z.object({
   industry: z.string().optional(),
   country: z.string().optional(),
   address: z.string().optional(),
-  website: z.string().url().optional(),
+  website: z.string().optional(),
   phone: z.array(z.string()).optional(),
   email: z.array(z.string().email()).optional(),
   foundedAt: z.string().datetime().optional(),

@@ -2,12 +2,27 @@ import Link from 'next/link';
 import { getDb } from '@/lib/db';
 import { organization } from '@/lib/db/schema';
 import { notDeleted, getPaginationParams, createPaginationMeta } from '@/lib/db/helpers';
-import { count, desc } from 'drizzle-orm';
+import { count, desc, and, or, ilike, eq, type SQL } from 'drizzle-orm';
+import { SearchToolbar } from '@/components/ui/SearchToolbar';
 import styles from './page.module.scss';
 
 interface PageProps {
-  searchParams: Promise<{ page?: string; limit?: string }>;
+  searchParams: Promise<{ page?: string; limit?: string; search?: string; risk?: string; type?: string }>;
 }
+
+const riskFilters = [
+  { value: 'CRITICAL', label: 'Critical' },
+  { value: 'HIGH', label: 'High' },
+  { value: 'MEDIUM', label: 'Medium' },
+  { value: 'LOW', label: 'Low' },
+];
+
+const typeFilters = [
+  { value: 'company', label: 'Company' },
+  { value: 'government', label: 'Government' },
+  { value: 'ngo', label: 'NGO' },
+  { value: 'military', label: 'Military' },
+];
 
 export default async function OrganizationsPage({ searchParams }: PageProps) {
   const params = await searchParams;
@@ -17,7 +32,29 @@ export default async function OrganizationsPage({ searchParams }: PageProps) {
     limit: Number(params.limit) || undefined,
   });
 
-  const whereClause = notDeleted(organization.deletedAt);
+  const conditions: SQL[] = [notDeleted(organization.deletedAt)];
+
+  if (params.search) {
+    const term = `%${params.search}%`;
+    conditions.push(
+      or(
+        ilike(organization.name, term),
+        ilike(organization.country, term),
+        ilike(organization.type, term),
+        ilike(organization.industry, term),
+      )!
+    );
+  }
+
+  if (params.risk) {
+    conditions.push(eq(organization.riskLevel, params.risk as 'LOW' | 'MEDIUM' | 'HIGH' | 'CRITICAL'));
+  }
+
+  if (params.type) {
+    conditions.push(ilike(organization.type, params.type));
+  }
+
+  const whereClause = and(...conditions);
 
   const [countResult, orgs] = await Promise.all([
     db.select({ total: count() }).from(organization).where(whereClause),
@@ -33,6 +70,12 @@ export default async function OrganizationsPage({ searchParams }: PageProps) {
   const total = countResult[0]?.total ?? 0;
   const meta = createPaginationMeta(page, limit, total);
 
+  const filterStr = [
+    params.search ? `&search=${params.search}` : '',
+    params.risk ? `&risk=${params.risk}` : '',
+    params.type ? `&type=${params.type}` : '',
+  ].join('');
+
   return (
     <div className={styles.page}>
       <div className={styles.pageHeader}>
@@ -42,32 +85,17 @@ export default async function OrganizationsPage({ searchParams }: PageProps) {
             {total} tracked entit{total !== 1 ? 'ies' : 'y'} — companies, agencies, and groups
           </p>
         </div>
-        <button className={styles.addBtn}>+ Add Organization</button>
+        <Link href="/organizations/new" className={styles.addBtn}>+ Add Organization</Link>
       </div>
 
-      <div className={styles.toolbar}>
-        <input
-          type="text"
-          className={styles.search}
-          placeholder="Search by name, country, type..."
-        />
-        <div className={styles.filters}>
-          <select className={styles.filterSelect}>
-            <option value="">All Risk Levels</option>
-            <option value="CRITICAL">Critical</option>
-            <option value="HIGH">High</option>
-            <option value="MEDIUM">Medium</option>
-            <option value="LOW">Low</option>
-          </select>
-          <select className={styles.filterSelect}>
-            <option value="">All Types</option>
-            <option value="company">Company</option>
-            <option value="government">Government</option>
-            <option value="ngo">NGO</option>
-            <option value="military">Military</option>
-          </select>
-        </div>
-      </div>
+      <SearchToolbar
+        basePath="/organizations"
+        searchPlaceholder="Search by name, country, type..."
+        filters={[
+          { key: 'risk', placeholder: 'All Risk Levels', options: riskFilters },
+          { key: 'type', placeholder: 'All Types', options: typeFilters },
+        ]}
+      />
 
       <div className={styles.tableWrapper}>
         <table className={styles.table}>
@@ -123,13 +151,13 @@ export default async function OrganizationsPage({ searchParams }: PageProps) {
         <span className={styles.paginationInfo}>{total} record{total !== 1 ? 's' : ''}</span>
         <div className={styles.paginationControls}>
           {page > 1 ? (
-            <Link href={`/organizations?page=${page - 1}&limit=${limit}`} className={styles.pageBtn}>Prev</Link>
+            <Link href={`/organizations?page=${page - 1}&limit=${limit}${filterStr}`} className={styles.pageBtn}>Prev</Link>
           ) : (
             <button className={styles.pageBtn} disabled>Prev</button>
           )}
           <span className={styles.pageIndicator}>Page {page} of {meta.totalPages || 1}</span>
           {page < meta.totalPages ? (
-            <Link href={`/organizations?page=${page + 1}&limit=${limit}`} className={styles.pageBtn}>Next</Link>
+            <Link href={`/organizations?page=${page + 1}&limit=${limit}${filterStr}`} className={styles.pageBtn}>Next</Link>
           ) : (
             <button className={styles.pageBtn} disabled>Next</button>
           )}

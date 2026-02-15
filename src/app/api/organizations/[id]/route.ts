@@ -11,7 +11,7 @@ const updateOrgSchema = z.object({
   industry: z.string().nullable().optional(),
   country: z.string().nullable().optional(),
   address: z.string().nullable().optional(),
-  website: z.string().url().nullable().optional(),
+  website: z.string().nullable().optional(),
   phone: z.array(z.string()).optional(),
   email: z.array(z.string().email()).optional(),
   foundedAt: z.string().datetime().nullable().optional(),

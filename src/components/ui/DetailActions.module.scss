@@ -1,0 +1,90 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+.actions {
+  display: flex;
+  gap: $space-sm;
+}
+
+.linkBtn {
+  @include button-base;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  color: var(--text-primary);
+
+  &:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+}
+
+.editBtn {
+  @include button-base;
+  background: var(--accent);
+  color: #fff;
+  text-decoration: none;
+
+  &:hover {
+    opacity: 0.9;
+  }
+}
+
+.deleteBtn {
+  @include button-base;
+  background: transparent;
+  border: 1px solid var(--danger);
+  color: var(--danger);
+
+  &:hover {
+    background: var(--danger);
+    color: #fff;
+  }
+}
+
+.confirmBody {
+  display: flex;
+  flex-direction: column;
+  gap: $space-md;
+
+  p {
+    margin: 0;
+    font-size: $text-base;
+    color: var(--text-primary);
+  }
+}
+
+.confirmHint {
+  font-size: $text-sm !important;
+  color: var(--text-secondary) !important;
+}
+
+.confirmActions {
+  display: flex;
+  gap: $space-sm;
+  padding-top: $space-sm;
+}
+
+.confirmBtn {
+  @include button-base;
+  background: var(--danger);
+  color: #fff;
+
+  &:hover:not(:disabled) {
+    filter: brightness(1.1);
+  }
+
+  &:disabled {
+    opacity: 0.5;
+  }
+}
+
+.cancelBtn {
+  @include button-base;
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--text-primary);
+
+  &:hover {
+    background: var(--bg-secondary);
+  }
+}

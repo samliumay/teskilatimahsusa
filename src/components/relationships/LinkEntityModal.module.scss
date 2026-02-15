@@ -1,0 +1,91 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: $space-md;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: $space-xs;
+}
+
+.fieldRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: $space-md;
+}
+
+.label {
+  font-size: $text-xs;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.input {
+  @include input-base;
+}
+
+.select {
+  @include input-base;
+  cursor: pointer;
+}
+
+.textarea {
+  @include input-base;
+  min-height: 60px;
+  resize: vertical;
+  font-family: $font-sans;
+}
+
+.hint {
+  font-size: $text-sm;
+  color: var(--text-secondary);
+  padding: $space-sm 0;
+}
+
+.error {
+  padding: $space-sm;
+  background: rgba(217, 74, 74, 0.1);
+  border: 1px solid var(--danger);
+  border-radius: $radius-sm;
+  color: var(--danger);
+  font-size: $text-sm;
+}
+
+.actions {
+  display: flex;
+  gap: $space-sm;
+  padding-top: $space-sm;
+  border-top: 1px solid var(--border);
+}
+
+.submitBtn {
+  @include button-base;
+  background: var(--accent);
+  color: #fff;
+
+  &:hover:not(:disabled) {
+    opacity: 0.9;
+  }
+
+  &:disabled {
+    opacity: 0.5;
+  }
+}
+
+.cancelBtn {
+  @include button-base;
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--text-primary);
+
+  &:hover {
+    background: var(--bg-secondary);
+  }
+}

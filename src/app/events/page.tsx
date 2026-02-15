@@ -2,12 +2,28 @@ import Link from 'next/link';
 import { getDb } from '@/lib/db';
 import { event } from '@/lib/db/schema';
 import { notDeleted, getPaginationParams, createPaginationMeta } from '@/lib/db/helpers';
-import { count, desc } from 'drizzle-orm';
+import { count, desc, and, or, ilike, eq, type SQL } from 'drizzle-orm';
+import { SearchToolbar } from '@/components/ui/SearchToolbar';
 import styles from './page.module.scss';
 
 interface PageProps {
-  searchParams: Promise<{ page?: string; limit?: string }>;
+  searchParams: Promise<{ page?: string; limit?: string; search?: string; status?: string; type?: string }>;
 }
+
+const statusFilters = [
+  { value: 'CONFIRMED', label: 'Confirmed' },
+  { value: 'SUSPECTED', label: 'Suspected' },
+  { value: 'UNVERIFIED', label: 'Unverified' },
+  { value: 'DENIED', label: 'Denied' },
+];
+
+const typeFilters = [
+  { value: 'meeting', label: 'Meeting' },
+  { value: 'transaction', label: 'Transaction' },
+  { value: 'communication', label: 'Communication' },
+  { value: 'incident', label: 'Incident' },
+  { value: 'travel', label: 'Travel' },
+];
 
 export default async function EventsPage({ searchParams }: PageProps) {
   const params = await searchParams;
@@ -17,7 +33,29 @@ export default async function EventsPage({ searchParams }: PageProps) {
     limit: Number(params.limit) || undefined,
   });
 
-  const whereClause = notDeleted(event.deletedAt);
+  const conditions: SQL[] = [notDeleted(event.deletedAt)];
+
+  if (params.search) {
+    const term = `%${params.search}%`;
+    conditions.push(
+      or(
+        ilike(event.title, term),
+        ilike(event.location, term),
+        ilike(event.country, term),
+        ilike(event.type, term),
+      )!
+    );
+  }
+
+  if (params.status) {
+    conditions.push(eq(event.estimatedStatus, params.status as 'CONFIRMED' | 'SUSPECTED' | 'UNVERIFIED' | 'DENIED'));
+  }
+
+  if (params.type) {
+    conditions.push(ilike(event.type, params.type));
+  }
+
+  const whereClause = and(...conditions);
 
   const [countResult, events] = await Promise.all([
     db.select({ total: count() }).from(event).where(whereClause),
@@ -33,6 +71,12 @@ export default async function EventsPage({ searchParams }: PageProps) {
   const total = countResult[0]?.total ?? 0;
   const meta = createPaginationMeta(page, limit, total);
 
+  const filterStr = [
+    params.search ? `&search=${params.search}` : '',
+    params.status ? `&status=${params.status}` : '',
+    params.type ? `&type=${params.type}` : '',
+  ].join('');
+
   return (
     <div className={styles.page}>
       <div className={styles.pageHeader}>
@@ -42,33 +86,17 @@ export default async function EventsPage({ searchParams }: PageProps) {
             {total} recorded event{total !== 1 ? 's' : ''} — meetings, transactions, incidents
           </p>
         </div>
-        <button className={styles.addBtn}>+ Add Event</button>
+        <Link href="/events/new" className={styles.addBtn}>+ Add Event</Link>
       </div>
 
-      <div className={styles.toolbar}>
-        <input
-          type="text"
-          className={styles.search}
-          placeholder="Search by title, location, type..."
-        />
-        <div className={styles.filters}>
-          <select className={styles.filterSelect}>
-            <option value="">All Statuses</option>
-            <option value="CONFIRMED">Confirmed</option>
-            <option value="SUSPECTED">Suspected</option>
-            <option value="UNVERIFIED">Unverified</option>
-            <option value="DENIED">Denied</option>
-          </select>
-          <select className={styles.filterSelect}>
-            <option value="">All Types</option>
-            <option value="meeting">Meeting</option>
-            <option value="transaction">Transaction</option>
-            <option value="communication">Communication</option>
-            <option value="incident">Incident</option>
-            <option value="travel">Travel</option>
-          </select>
-        </div>
-      </div>
+      <SearchToolbar
+        basePath="/events"
+        searchPlaceholder="Search by title, location, type..."
+        filters={[
+          { key: 'status', placeholder: 'All Statuses', options: statusFilters },
+          { key: 'type', placeholder: 'All Types', options: typeFilters },
+        ]}
+      />
 
       <div className={styles.tableWrapper}>
         <table className={styles.table}>
@@ -124,13 +152,13 @@ export default async function EventsPage({ searchParams }: PageProps) {
         <span className={styles.paginationInfo}>{total} record{total !== 1 ? 's' : ''}</span>
         <div className={styles.paginationControls}>
           {page > 1 ? (
-            <Link href={`/events?page=${page - 1}&limit=${limit}`} className={styles.pageBtn}>Prev</Link>
+            <Link href={`/events?page=${page - 1}&limit=${limit}${filterStr}`} className={styles.pageBtn}>Prev</Link>
           ) : (
             <button className={styles.pageBtn} disabled>Prev</button>
           )}
           <span className={styles.pageIndicator}>Page {page} of {meta.totalPages || 1}</span>
           {page < meta.totalPages ? (
-            <Link href={`/events?page=${page + 1}&limit=${limit}`} className={styles.pageBtn}>Next</Link>
+            <Link href={`/events?page=${page + 1}&limit=${limit}${filterStr}`} className={styles.pageBtn}>Next</Link>
           ) : (
             <button className={styles.pageBtn} disabled>Next</button>
           )}

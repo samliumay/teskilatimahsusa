@@ -1,0 +1,404 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+.page {
+  max-width: 1400px;
+}
+
+.pageHeader {
+  margin-bottom: $space-lg;
+}
+
+.title {
+  font-size: $text-2xl;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: $space-xs;
+}
+
+.description {
+  font-size: $text-base;
+  color: var(--text-secondary);
+}
+
+// ─── Documentation Card ───────────────────────────────
+
+.docsCard {
+  @include card;
+  padding: $space-lg;
+  margin-bottom: $space-lg;
+}
+
+.docsTitle {
+  font-size: $text-lg;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: $space-md;
+}
+
+.docsText {
+  font-size: $text-base;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin-bottom: $space-md;
+}
+
+.docsGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: $space-md;
+  margin-bottom: $space-md;
+}
+
+.docsBlock {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: $radius-sm;
+  padding: $space-md;
+}
+
+.docsBlockTitle {
+  font-size: $text-sm;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: $space-sm;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.docsBlockList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  font-size: $text-sm;
+  color: var(--text-secondary);
+  font-family: $font-mono;
+
+  li {
+    padding: 2px 0;
+
+    &::before {
+      content: '>';
+      margin-right: $space-sm;
+      color: var(--accent);
+    }
+  }
+}
+
+.codeBlock {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: $radius-sm;
+  padding: $space-md;
+  margin-bottom: $space-md;
+  overflow-x: auto;
+  @include scrollbar;
+
+  pre {
+    margin: 0;
+    font-family: $font-mono;
+    font-size: $text-sm;
+    color: var(--text-primary);
+    line-height: 1.5;
+    white-space: pre;
+  }
+}
+
+.downloadBtn {
+  @include button-base;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  color: var(--accent);
+  font-size: $text-sm;
+  text-decoration: none;
+
+  &:hover {
+    border-color: var(--accent);
+    background: var(--bg-card);
+  }
+}
+
+// ─── Upload Card ──────────────────────────────────────
+
+.uploadCard {
+  @include card;
+  padding: $space-lg;
+  margin-bottom: $space-lg;
+}
+
+.uploadTitle {
+  font-size: $text-lg;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: $space-md;
+}
+
+.dropZone {
+  border: 2px dashed var(--border);
+  border-radius: $radius-md;
+  padding: $space-2xl $space-lg;
+  text-align: center;
+  cursor: pointer;
+  transition: all $transition-fast;
+
+  &:hover {
+    border-color: var(--accent);
+    background: var(--bg-secondary);
+  }
+}
+
+.dropZoneActive {
+  border-color: var(--accent);
+  background: var(--bg-secondary);
+}
+
+.dropIcon {
+  font-size: $text-2xl;
+  color: var(--text-disabled);
+  margin-bottom: $space-sm;
+}
+
+.dropText {
+  font-size: $text-base;
+  color: var(--text-secondary);
+  margin-bottom: $space-xs;
+}
+
+.dropHint {
+  font-size: $text-sm;
+  color: var(--text-disabled);
+}
+
+.fileInfo {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: $radius-sm;
+  padding: $space-sm $space-md;
+  margin-bottom: $space-md;
+}
+
+.fileName {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  color: var(--text-primary);
+}
+
+.fileSize {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  color: var(--text-secondary);
+}
+
+.uploadActions {
+  display: flex;
+  gap: $space-sm;
+}
+
+.importBtn {
+  @include button-base;
+  background: var(--accent);
+  color: #fff;
+
+  &:hover:not(:disabled) {
+    opacity: 0.9;
+  }
+}
+
+.clearBtn {
+  @include button-base;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  color: var(--text-secondary);
+
+  &:hover {
+    border-color: var(--text-secondary);
+  }
+}
+
+// ─── Results Card ─────────────────────────────────────
+
+.resultCard {
+  @include card;
+  padding: $space-lg;
+}
+
+.resultTitle {
+  font-size: $text-lg;
+  font-weight: 600;
+  margin-bottom: $space-md;
+}
+
+.resultSuccess {
+  color: var(--success);
+}
+
+.resultError {
+  color: var(--danger);
+}
+
+.countsGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: $space-md;
+  margin-bottom: $space-md;
+}
+
+.countItem {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: $radius-sm;
+  padding: $space-md;
+  text-align: center;
+}
+
+.countValue {
+  font-family: $font-mono;
+  font-size: $text-2xl;
+  font-weight: 700;
+  color: var(--accent);
+  display: block;
+}
+
+.countLabel {
+  font-size: $text-sm;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-top: $space-xs;
+  display: block;
+}
+
+.breakdownTitle {
+  font-size: $text-sm;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-bottom: $space-sm;
+}
+
+.breakdownGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: $space-sm;
+}
+
+.breakdownItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: $radius-sm;
+  padding: $space-sm $space-md;
+  font-size: $text-sm;
+}
+
+.breakdownLabel {
+  color: var(--text-secondary);
+}
+
+.breakdownCount {
+  font-family: $font-mono;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.errorDetails {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: $radius-sm;
+  padding: $space-md;
+  max-height: 300px;
+  overflow-y: auto;
+  @include scrollbar;
+
+  pre {
+    margin: 0;
+    font-family: $font-mono;
+    font-size: $text-sm;
+    color: var(--danger);
+    white-space: pre-wrap;
+    word-break: break-word;
+  }
+}
+
+// ─── Wipeout Card ─────────────────────────────────────
+
+.wipeCard {
+  @include card;
+  padding: $space-lg;
+  margin-top: $space-lg;
+  border-color: var(--danger);
+}
+
+.wipeHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: $space-lg;
+}
+
+.wipeTitle {
+  font-size: $text-lg;
+  font-weight: 600;
+  color: var(--danger);
+  margin-bottom: $space-xs;
+}
+
+.wipeText {
+  font-size: $text-base;
+  color: var(--text-secondary);
+}
+
+.wipeBtn {
+  @include button-base;
+  background: transparent;
+  border: 1px solid var(--danger);
+  color: var(--danger);
+  white-space: nowrap;
+  flex-shrink: 0;
+
+  &:hover:not(:disabled) {
+    background: var(--danger);
+    color: #fff;
+  }
+}
+
+.wipeConfirm {
+  display: flex;
+  align-items: center;
+  gap: $space-sm;
+  flex-shrink: 0;
+}
+
+.wipeWarning {
+  font-size: $text-sm;
+  font-weight: 600;
+  color: var(--danger);
+  white-space: nowrap;
+}
+
+.wipeConfirmBtn {
+  @include button-base;
+  background: var(--danger);
+  color: #fff;
+  white-space: nowrap;
+
+  &:hover:not(:disabled) {
+    opacity: 0.9;
+  }
+}
+
+.wipeResult {
+  margin-top: $space-md;
+  padding: $space-sm $space-md;
+  border-radius: $radius-sm;
+  font-size: $text-sm;
+  font-family: $font-mono;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+}

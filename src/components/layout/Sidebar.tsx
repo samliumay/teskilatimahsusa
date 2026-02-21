@@ -12,6 +12,7 @@ const navItems = [
   { href: '/events', label: 'Events', shortcut: 'E' },
   { href: '/relationships', label: 'Relationships', shortcut: 'R' },
   { href: '/graph', label: 'Network Graph', shortcut: 'G' },
+  { href: '/simulation', label: 'Simulation', shortcut: 'S' },
 ];
 
 export function Sidebar() {

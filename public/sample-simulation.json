@@ -1,0 +1,124 @@
+{
+  "people": [
+    {
+      "_ref": "person-ali",
+      "firstName": "Ali",
+      "lastName": "Yilmaz",
+      "nationality": "Turkey",
+      "riskLevel": "HIGH",
+      "tags": ["operative", "field-agent"],
+      "notes": "Primary subject of investigation"
+    },
+    {
+      "_ref": "person-elif",
+      "firstName": "Elif",
+      "lastName": "Demir",
+      "nationality": "Turkey",
+      "riskLevel": "MEDIUM",
+      "notes": "Suspected handler"
+    },
+    {
+      "_ref": "person-karl",
+      "firstName": "Karl",
+      "lastName": "Weber",
+      "nationality": "Germany",
+      "riskLevel": "LOW"
+    }
+  ],
+  "organizations": [
+    {
+      "_ref": "org-acme",
+      "name": "ACME Trading Corp",
+      "type": "company",
+      "country": "Turkey",
+      "industry": "Import/Export"
+    },
+    {
+      "_ref": "org-phoenix",
+      "name": "Phoenix Holdings",
+      "type": "company",
+      "country": "Germany"
+    }
+  ],
+  "events": [
+    {
+      "_ref": "evt-meeting",
+      "title": "Istanbul Cafe Meeting",
+      "type": "meeting",
+      "date": "2025-03-15T10:00:00Z",
+      "location": "Grand Bazaar Cafe, Istanbul",
+      "country": "Turkey",
+      "estimatedStatus": "CONFIRMED"
+    },
+    {
+      "_ref": "evt-transfer",
+      "title": "Wire Transfer to Phoenix",
+      "type": "transaction",
+      "date": "2025-03-20T14:30:00Z",
+      "estimatedStatus": "SUSPECTED"
+    }
+  ],
+  "relationships": [
+    {
+      "type": "person-to-person",
+      "source": "person-ali",
+      "target": "person-elif",
+      "relationshipType": "colleague",
+      "estimatedStatus": "CONFIRMED",
+      "strength": "STRONG"
+    },
+    {
+      "type": "person-to-person",
+      "source": "person-elif",
+      "target": "person-karl",
+      "relationshipType": "contact",
+      "estimatedStatus": "SUSPECTED",
+      "strength": "WEAK"
+    },
+    {
+      "type": "person-to-org",
+      "person": "person-ali",
+      "organization": "org-acme",
+      "role": "CEO",
+      "currentlyActive": true
+    },
+    {
+      "type": "person-to-org",
+      "person": "person-karl",
+      "organization": "org-phoenix",
+      "role": "Director",
+      "currentlyActive": true
+    },
+    {
+      "type": "org-to-org",
+      "source": "org-acme",
+      "target": "org-phoenix",
+      "relationshipType": "partner",
+      "estimatedStatus": "SUSPECTED"
+    },
+    {
+      "type": "event-to-person",
+      "event": "evt-meeting",
+      "person": "person-ali",
+      "role": "organizer"
+    },
+    {
+      "type": "event-to-person",
+      "event": "evt-meeting",
+      "person": "person-elif",
+      "role": "attendee"
+    },
+    {
+      "type": "event-to-org",
+      "event": "evt-transfer",
+      "organization": "org-phoenix",
+      "role": "recipient"
+    },
+    {
+      "type": "event-to-event",
+      "source": "evt-meeting",
+      "target": "evt-transfer",
+      "relationshipType": "led_to"
+    }
+  ]
+}
